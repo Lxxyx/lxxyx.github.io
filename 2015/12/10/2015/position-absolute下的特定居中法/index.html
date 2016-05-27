@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>position absolute下的特定居中法--挤！ | Lxxyx的前端乐园</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="场景重现使用了Vue+Vue-loader+Webpack，所以是组件化开发的网页。其中，网页需要实现的效果是点击按钮，弹出照片墙这个div和遮罩。12345678910&amp;lt;template&amp;gt;	&amp;lt;div class=&quot;photowall&quot;&amp;gt;		&amp;lt;pmask&amp;gt;&amp;lt;/pmask&amp;gt;		&amp;lt;div class=&quot;pcontainer&quot;&amp;gt;			&amp;lt;p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="position absolute下的特定居中法--挤！">
+<meta property="og:url" content="http://www.lxxyx.win/2015/12/10/2015/position-absolute下的特定居中法/index.html">
+<meta property="og:site_name" content="Lxxyx的前端乐园">
+<meta property="og:description" content="场景重现使用了Vue+Vue-loader+Webpack，所以是组件化开发的网页。其中，网页需要实现的效果是点击按钮，弹出照片墙这个div和遮罩。12345678910&amp;lt;template&amp;gt;	&amp;lt;div class=&quot;photowall&quot;&amp;gt;		&amp;lt;pmask&amp;gt;&amp;lt;/pmask&amp;gt;		&amp;lt;div class=&quot;pcontainer&quot;&amp;gt;			&amp;lt;p">
+<meta property="og:updated_time" content="2016-05-27T10:45:31.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="position absolute下的特定居中法--挤！">
+<meta name="twitter:description" content="场景重现使用了Vue+Vue-loader+Webpack，所以是组件化开发的网页。其中，网页需要实现的效果是点击按钮，弹出照片墙这个div和遮罩。12345678910&amp;lt;template&amp;gt;	&amp;lt;div class=&quot;photowall&quot;&amp;gt;		&amp;lt;pmask&amp;gt;&amp;lt;/pmask&amp;gt;		&amp;lt;div class=&quot;pcontainer&quot;&amp;gt;			&amp;lt;p">
+  
+    <link rel="alternative" href="/atom.xml" title="Lxxyx的前端乐园" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lxxyx</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">文科生の前端生活</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/前端">前端之路</a></li>
+				        
+							<li><a href="/tags/管理">管理学习</a></li>
+				        
+							<li><a href="/tags/随笔">随笔杂文</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/管理/" style="font-size: 10px;">管理</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guowenfh.github.io/">三省吾身丶丶</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zhibinnet.com/">island的个人网站</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ienning.com/">Enning</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">某211的纯文科生，2018年毕业。热爱前端与Node.js。在学校的网站工作室中担任前端开发的工作，有实际项目经验。将来想成为一名前端工程师。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Lxxyx</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lxxyx</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">文科生の前端生活</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/前端">前端之路</a></li>
+		        
+					<li><a href="/tags/管理">管理学习</a></li>
+		        
+					<li><a href="/tags/随笔">随笔杂文</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-2015/position-absolute下的特定居中法" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/12/10/2015/position-absolute下的特定居中法/" class="article-date">
+  	<time datetime="2015-12-10T08:47:24.000Z" itemprop="datePublished">2015-12-10</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      position absolute下的特定居中法--挤！
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="场景重现"><a href="#场景重现" class="headerlink" title="场景重现"></a>场景重现</h2><p>使用了Vue+Vue-loader+Webpack，所以是组件化开发的网页。<br>其中，网页需要实现的效果是点击按钮，弹出照片墙这个div和遮罩。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"photowall"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pmask</span>&gt;</span><span class="tag">&lt;/<span class="name">pmask</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pcontainer"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pheader</span>&gt;</span><span class="tag">&lt;/<span class="name">pheader</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pmain</span>&gt;</span><span class="tag">&lt;/<span class="name">pmain</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">pfooter</span>&gt;</span><span class="tag">&lt;/<span class="name">pfooter</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>遮罩组件的代码如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pmask"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="css"></span><br><span class="line">	<span class="selector-class">.pmask</span> &#123;</span><br><span class="line">		<span class="attribute">position</span>: absolute;</span><br><span class="line">		<span class="attribute">left</span>: <span class="number">0</span>;</span><br><span class="line">		<span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">		<span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">		<span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">		<span class="attribute">background</span>: black;</span><br><span class="line">		<span class="attribute">opacity</span>: <span class="number">0.7</span>;</span><br><span class="line">		<span class="attribute">z-index</span>: <span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>照片墙主体的代码如下：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.pcontainer</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">1080px</span>;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">768px</span>;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>为了覆盖，所以才用了position:absolute的方式。<br>于是很高兴的保存，合并，编译。</p>
+<p>但是编译完成后，一点开照片墙，傻眼了。<br>所有东西都被mask遮罩给覆盖了。<br>仔细想想，是因为没有设置z-index的缘故。</p>
+<p>于是高兴的加上了z-index.<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.pcontainer</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">1080px</span>;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">768px</span>;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">	<span class="attribute">z-index</span>: <span class="number">999</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是发现z-index无效，于是想起来</p>
+<blockquote>
+<p>定义的CSS中有position属性值为absolute、relative或fixed，z-index属性才起作用。</p>
+</blockquote>
+<p>于是修改后<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.pcontainer</span> &#123;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">1080px</span>;</span><br><span class="line">	<span class="attribute">min-height</span>: <span class="number">768px</span>;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">	<span class="attribute">z-index</span>: <span class="number">999</span>;</span><br><span class="line">	<span class="attribute">position</span>:absolute;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>继续查看修改后的效果。</p>
+<p>嗯，整个照片墙显示正常了，但是居中却不起作用了。原因是设置position:absolute后，margin的值就不起作用了。</p>
+<p>但是项目要求我们要居中。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>一开始想了一回儿，决定用一个方法，把position:absolute挤到中间去。<br>因为定位为absolute的元素，会根据最近的父级元素定位。</p>
+<p>于是我们在外面套上一个div photomain。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"photowall"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">pmask</span>&gt;</span><span class="tag">&lt;/<span class="name">pmask</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"photomain"</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"pcontainer"</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">pheader</span>&gt;</span><span class="tag">&lt;/<span class="name">pheader</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">pmain</span>&gt;</span><span class="tag">&lt;/<span class="name">pmain</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">pfooter</span>&gt;</span><span class="tag">&lt;/<span class="name">pfooter</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>给photomain加上position:relative，使其成为pcontainer的父元素。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.photomain</span> &#123;</span><br><span class="line">	<span class="attribute">position</span>: relative;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同时，给photomain设定和pcontainer一样的宽度，再加上margin:0 auto。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.photomain</span> &#123;</span><br><span class="line">	<span class="attribute">position</span>: relative;</span><br><span class="line">	<span class="attribute">width</span>: <span class="number">1080px</span>;</span><br><span class="line">	<span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>那么，最后的效果是。pcontainer完美居中。</p>
+<p>原因是因为pcontainer跟着photomain一块移动，且宽度一致。</p>
+<p>所以相当于photomain的位置就是pcontainer的位置。这样既能达到居中的效果，也能设定z-index值。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这应该算小弟的第一篇技术文章，起因是今天下午项目中遇到的BUG，居中的方法也是自己摸索出来的。所以并不清楚这算不算好方法。</p>
+<p>不过还是很开心，第一次自己不看百度解决CSS的BUG。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/11/2015/jQuery-val-获取输入框值/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          JS获取输入框的值，替代jQuery val()
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/10/2015/一次奇妙的Debug旅程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">莫名其妙出现的jQuery与报错--一次奇妙的Debug旅程</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015/position-absolute下的特定居中法" data-title="position absolute下的特定居中法--挤！" data-url="http://www.lxxyx.win/2015/12/10/2015/position-absolute下的特定居中法/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Lxxyx"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Lxxyx
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71744638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+  </div>
+</body>
+</html>

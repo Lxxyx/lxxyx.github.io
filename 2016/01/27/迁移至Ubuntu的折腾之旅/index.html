@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>迁移至Ubuntu的折腾之旅 | Lxxyx的前端乐园</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前因之前一直有装Win10和Deepin的双系统，本打算装了Deepin15后，就安心的在Linux下学习和工作。但无奈的是，Deepin15基于Debian而非Ubuntu，所以为了装一个shadowsocks的Gui客户端，还得专门去编译。这也就算了，在装上SS后，又安装了Sublime，但Sublime在Linux下有不能输入中文的BUG。 这个问题算是致命问题了，因为我平常90%的开发，都">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迁移至Ubuntu的折腾之旅">
+<meta property="og:url" content="http://www.lxxyx.win/2016/01/27/迁移至Ubuntu的折腾之旅/index.html">
+<meta property="og:site_name" content="Lxxyx的前端乐园">
+<meta property="og:description" content="前因之前一直有装Win10和Deepin的双系统，本打算装了Deepin15后，就安心的在Linux下学习和工作。但无奈的是，Deepin15基于Debian而非Ubuntu，所以为了装一个shadowsocks的Gui客户端，还得专门去编译。这也就算了，在装上SS后，又安装了Sublime，但Sublime在Linux下有不能输入中文的BUG。 这个问题算是致命问题了，因为我平常90%的开发，都">
+<meta property="og:updated_time" content="2016-05-27T10:45:31.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="迁移至Ubuntu的折腾之旅">
+<meta name="twitter:description" content="前因之前一直有装Win10和Deepin的双系统，本打算装了Deepin15后，就安心的在Linux下学习和工作。但无奈的是，Deepin15基于Debian而非Ubuntu，所以为了装一个shadowsocks的Gui客户端，还得专门去编译。这也就算了，在装上SS后，又安装了Sublime，但Sublime在Linux下有不能输入中文的BUG。 这个问题算是致命问题了，因为我平常90%的开发，都">
+  
+    <link rel="alternative" href="/atom.xml" title="Lxxyx的前端乐园" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lxxyx</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">文科生の前端生活</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/前端">前端之路</a></li>
+				        
+							<li><a href="/tags/管理">管理学习</a></li>
+				        
+							<li><a href="/tags/随笔">随笔杂文</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/管理/" style="font-size: 10px;">管理</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guowenfh.github.io/">三省吾身丶丶</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zhibinnet.com/">island的个人网站</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ienning.com/">Enning</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">某211的纯文科生，2018年毕业。热爱前端与Node.js。在学校的网站工作室中担任前端开发的工作，有实际项目经验。将来想成为一名前端工程师。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Lxxyx</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lxxyx</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">文科生の前端生活</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/前端">前端之路</a></li>
+		        
+					<li><a href="/tags/管理">管理学习</a></li>
+		        
+					<li><a href="/tags/随笔">随笔杂文</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-迁移至Ubuntu的折腾之旅" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/27/迁移至Ubuntu的折腾之旅/" class="article-date">
+  	<time datetime="2016-01-27T10:33:04.000Z" itemprop="datePublished">2016-01-27</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      迁移至Ubuntu的折腾之旅
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前因"><a href="#前因" class="headerlink" title="前因"></a>前因</h2><p>之前一直有装Win10和Deepin的双系统，本打算装了Deepin15后，就安心的在Linux下学习和工作。<br>但无奈的是，Deepin15基于Debian而非Ubuntu，所以为了装一个shadowsocks的Gui客户端，还得专门去编译。这也就算了，在装上SS后，又安装了Sublime，但Sublime在Linux下有不能输入中文的BUG。 这个问题算是致命问题了，因为我平常90%的开发，都只使用Sublime Text。<br>于是去找解决方法。一番谷歌之下，告诉我得去新建个c文件啥的。或者去Github上使用一键包。<br>我当然用一键包啊，于是很开心的打开了修复包的Github地址，开头第一句话就让我懵逼了。<br><code>There still some problems with Debian.</code><br>翻译成中文就是：“Debian用户还是洗洗睡吧。”<br>再加上Deepin15桌面经常会冒出别的文件夹的新文件，于是心灰意冷的我，开始继续使用Windows做开发。 </p>
+<h2 id="向Ubuntu转移"><a href="#向Ubuntu转移" class="headerlink" title="向Ubuntu转移"></a>向Ubuntu转移</h2><p>本来Windows用的也还可以，但是由于自身CPU性能跟不太上(i5-4200u)，用webpack编译个文件要花上40多秒，运行过程中也各种降频，简直不能忍。于是决定上Liunx，同时又因为有Deepin的前车之鉴，所以决定上Ubuntu Kylin。<br>嗯，不是Ubuntu，是中国的麒麟版。原因很简单：壁纸好看+内置Chrome和搜狗输入法。 于是在折腾中，开始了Ubuntu Kylin的安装。</p>
+<h2 id="安装与配置"><a href="#安装与配置" class="headerlink" title="安装与配置"></a>安装与配置</h2><p>安装过程倒是稀疏平常，一路next就开始了安装。安装速度很快。不一会儿就提示我安装完成了。<br>至于分区，当然是用Ubuntu安装界面的一键分区啦。（逃） 配置过程就一帆风顺的多了。</p>
+<p>开机，安装更新，git和Shadowsocks，然后就是安装oh-my-zsh。</p>
+<p>装上新款的oh-my-zsh后，继续安装nvm用于管理node版本。如果先装nvm再装zsh的话，zsh启动时会读取不到nvm。虽然可以自己去配置文件改，但终究比较麻烦。 接下来用nvm安装node 5.5（版本号更新的好快……），安装国内源的cnpm。也都一下子就过去了。</p>
+<p>最难配置的地方，还是在Sublime，下了修复文件修复Sublime不能输入中文的问题后，发现只有在命令行输入<code>subl</code>才能启动输入中文的Sublime,于是又深入<code>/usr/share/applications</code>去修改<code>sublime_text.desktop</code>，把<code>exec</code>改为<code>subl</code>。顺带还在<code>default.list</code>中把默认编辑软件从gedit换成了Sublime。于是耗时好几个小时的Ubuntu，终于完成了。</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>果然做开发，还是Linux好，不说别的。感觉Linux的幺蛾子比windows要少上很多。用的时候也没用怎么卡顿，编译速度超过windows n+1倍。 不管咋样，寒假就靠ubuntu过啦～</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/28/寒假前端学习/寒假前端学习(7)——学习JavaScript之this,call,apply/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          寒假前端学习(7)——学习JavaScript之this,call,apply
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/19/寒假前端学习/寒假前端学习(6)——学习JavaScript数据结构与算法：二叉搜索树/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">寒假前端学习(6)——学习JavaScript数据结构与算法（四）：二叉搜索树</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="迁移至Ubuntu的折腾之旅" data-title="迁移至Ubuntu的折腾之旅" data-url="http://www.lxxyx.win/2016/01/27/迁移至Ubuntu的折腾之旅/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Lxxyx"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Lxxyx
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71744638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+  </div>
+</body>
+</html>

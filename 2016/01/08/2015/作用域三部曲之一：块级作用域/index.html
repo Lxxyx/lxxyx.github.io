@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>作用域三部曲之一：块级作用域 | Lxxyx的前端乐园</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="三部曲的简介本篇文章，是介绍JavaScript中作用域部分。自己这段时间也算是看了很多JavaScript的书，都是和作用域方面有关的。ES6那是后话，暂时不提。这儿是ES5的情况。考虑到内容过多。准备分为三部分来讲述。分别是：块级作用域、IIFE与ES6 let、闭包。
+第一篇文章，讲的就是块级作用域的内容。
+什么是块级作用域？在C语言，Java中，都有块级作用域的概念。举个最经典的例子。12">
+<meta property="og:type" content="article">
+<meta property="og:title" content="作用域三部曲之一：块级作用域">
+<meta property="og:url" content="http://www.lxxyx.win/2016/01/08/2015/作用域三部曲之一：块级作用域/index.html">
+<meta property="og:site_name" content="Lxxyx的前端乐园">
+<meta property="og:description" content="三部曲的简介本篇文章，是介绍JavaScript中作用域部分。自己这段时间也算是看了很多JavaScript的书，都是和作用域方面有关的。ES6那是后话，暂时不提。这儿是ES5的情况。考虑到内容过多。准备分为三部分来讲述。分别是：块级作用域、IIFE与ES6 let、闭包。
+第一篇文章，讲的就是块级作用域的内容。
+什么是块级作用域？在C语言，Java中，都有块级作用域的概念。举个最经典的例子。12">
+<meta property="og:updated_time" content="2016-05-27T10:45:31.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="作用域三部曲之一：块级作用域">
+<meta name="twitter:description" content="三部曲的简介本篇文章，是介绍JavaScript中作用域部分。自己这段时间也算是看了很多JavaScript的书，都是和作用域方面有关的。ES6那是后话，暂时不提。这儿是ES5的情况。考虑到内容过多。准备分为三部分来讲述。分别是：块级作用域、IIFE与ES6 let、闭包。
+第一篇文章，讲的就是块级作用域的内容。
+什么是块级作用域？在C语言，Java中，都有块级作用域的概念。举个最经典的例子。12">
+  
+    <link rel="alternative" href="/atom.xml" title="Lxxyx的前端乐园" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lxxyx</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">文科生の前端生活</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/前端">前端之路</a></li>
+				        
+							<li><a href="/tags/管理">管理学习</a></li>
+				        
+							<li><a href="/tags/随笔">随笔杂文</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/管理/" style="font-size: 10px;">管理</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guowenfh.github.io/">三省吾身丶丶</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zhibinnet.com/">island的个人网站</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ienning.com/">Enning</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">某211的纯文科生，2018年毕业。热爱前端与Node.js。在学校的网站工作室中担任前端开发的工作，有实际项目经验。将来想成为一名前端工程师。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Lxxyx</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lxxyx</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">文科生の前端生活</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/前端">前端之路</a></li>
+		        
+					<li><a href="/tags/管理">管理学习</a></li>
+		        
+					<li><a href="/tags/随笔">随笔杂文</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-2015/作用域三部曲之一：块级作用域" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/01/08/2015/作用域三部曲之一：块级作用域/" class="article-date">
+  	<time datetime="2016-01-08T08:21:50.000Z" itemprop="datePublished">2016-01-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      作用域三部曲之一：块级作用域
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="三部曲的简介"><a href="#三部曲的简介" class="headerlink" title="三部曲的简介"></a>三部曲的简介</h2><p>本篇文章，是介绍JavaScript中作用域部分。<br>自己这段时间也算是看了很多JavaScript的书，都是和作用域方面有关的。<br>ES6那是后话，暂时不提。这儿是ES5的情况。<br>考虑到内容过多。准备分为三部分来讲述。<br>分别是：块级作用域、IIFE与ES6 let、闭包。</p>
+<p>第一篇文章，讲的就是块级作用域的内容。</p>
+<h2 id="什么是块级作用域？"><a href="#什么是块级作用域？" class="headerlink" title="什么是块级作用域？"></a>什么是块级作用域？</h2><p>在C语言，Java中，都有块级作用域的概念。举个最经典的例子。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; ++i)</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">/* 这是C语言 */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,i ); <span class="comment">//出错，读取不到i的值</span></span><br></pre></td></tr></table></figure></p>
+<p>在循环结束后，变量i就不复存在。这就是块级作用域，变量只能在函数、循环运行是存在。一旦函数或循环运行完毕，变量就会被销毁。</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>块级作用域的原理，是我看《大话数据结构》这本书中学习到的。<br>栈是一种LIFO的结构。先进后出。<br>以刚才的循环为例。<br>在运行for的时候，压栈，把for循环和对应的变量<code>i</code>压入栈内存。运行结束时便将栈内存弹出。里面的变量<code>i</code>也不复存在了。</p>
+<h2 id="为什么要有块级作用域"><a href="#为什么要有块级作用域" class="headerlink" title="为什么要有块级作用域"></a>为什么要有块级作用域</h2><p>打个比方，如果一个项目有一百个人在同时开发。每个人都写了好几个循环。<br>如果没有块级作用域，那么在最后项目合并时候，将会有数不清的变量名冲突。比如说，100个i？<br>这种块级作用域中定义变量的方式，叫做局部变量。</p>
+<h2 id="JavaScript中的块级作用域"><a href="#JavaScript中的块级作用域" class="headerlink" title="JavaScript中的块级作用域"></a>JavaScript中的块级作用域</h2><p>在JavaScript中，存在一个全局变量环境。但JavaScript的块级作用域是不完整的。<br>它可以有局部变量。像这样的。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();<span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(i);<span class="comment">// error,i未被定义</span></span><br></pre></td></tr></table></figure></p>
+<p>这是局部变量的概念。其实非常好理解。<br>这个用<code>var</code>定义的变量。只有在函数执行的瞬间才存在，执行完毕就会被销毁。<br>如果不用var。直接<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  i = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test();<span class="comment">// i = 0</span></span><br><span class="line"><span class="built_in">console</span>.log(i);<span class="comment">// i = 0</span></span><br></pre></td></tr></table></figure></p>
+<p>因为在函数内不用<code>var</code>关键字定义的变量，在函数运行后会成为全局变量。</p>
+<p>而JavaScript没有块级作用域所暴露的问题，在循环就有体现。<br>假如在JavaScript运行一个for循环<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  <span class="comment">//一些操作</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(i) <span class="comment">// i = 10</span></span><br></pre></td></tr></table></figure></p>
+<p>你会发现i还会存在。此时的i，是在全局变量环境中的。<br>这是极其恐怖的事情，因为在当代的前端开发中，大型项目往往有很多人一起开发。但是全局变量环境只有一个。<br>那么也就是说，如果这样的话，项目中变量的冲突会极其严重。</p>
+<h2 id="那怎么解决？"><a href="#那怎么解决？" class="headerlink" title="那怎么解决？"></a>那怎么解决？</h2><p>这就是下一章要讲述的内容啦，会讲述JavaScript如何模仿块级作用域，同时也会讲述ES6原生实现的块级作用域。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/01/09/寒假前端学习/寒假的前端学习计划/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          2016，寒假前端学习计划与进度
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/01/08/2015/闭包中循环部分的理解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">闭包中循环部分的理解</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015/作用域三部曲之一：块级作用域" data-title="作用域三部曲之一：块级作用域" data-url="http://www.lxxyx.win/2016/01/08/2015/作用域三部曲之一：块级作用域/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Lxxyx"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Lxxyx
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71744638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+  </div>
+</body>
+</html>

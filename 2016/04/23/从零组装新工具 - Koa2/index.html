@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>从零组装新工具 - Koa2 | Lxxyx的前端乐园</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="整个项目已开源于Github，项目地址：koa2-easy，在线Demo:
+
+起因作为一个前端，Node.js算是必备知识之一。同时因为自己需要做一些后台性的工作，或者完成一个小型应用。所以学习了Node的Express框架，用于辅助和加速开发。
+不过当初自己对Express的学习和了解，并不是很深入。要求也仅仅是停留在能发送静态文件，构建后台API，与数据库完成简单交互而已。所以当初自己选用E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零组装新工具 - Koa2">
+<meta property="og:url" content="http://www.lxxyx.win/2016/04/23/从零组装新工具 - Koa2/index.html">
+<meta property="og:site_name" content="Lxxyx的前端乐园">
+<meta property="og:description" content="整个项目已开源于Github，项目地址：koa2-easy，在线Demo:
+
+起因作为一个前端，Node.js算是必备知识之一。同时因为自己需要做一些后台性的工作，或者完成一个小型应用。所以学习了Node的Express框架，用于辅助和加速开发。
+不过当初自己对Express的学习和了解，并不是很深入。要求也仅仅是停留在能发送静态文件，构建后台API，与数据库完成简单交互而已。所以当初自己选用E">
+<meta property="og:image" content="http://7xoxxe.com1.z0.glb.clouddn.com/koa.jpg">
+<meta property="og:updated_time" content="2016-05-27T10:45:31.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从零组装新工具 - Koa2">
+<meta name="twitter:description" content="整个项目已开源于Github，项目地址：koa2-easy，在线Demo:
+
+起因作为一个前端，Node.js算是必备知识之一。同时因为自己需要做一些后台性的工作，或者完成一个小型应用。所以学习了Node的Express框架，用于辅助和加速开发。
+不过当初自己对Express的学习和了解，并不是很深入。要求也仅仅是停留在能发送静态文件，构建后台API，与数据库完成简单交互而已。所以当初自己选用E">
+<meta name="twitter:image" content="http://7xoxxe.com1.z0.glb.clouddn.com/koa.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Lxxyx的前端乐园" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lxxyx</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">文科生の前端生活</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/前端">前端之路</a></li>
+				        
+							<li><a href="/tags/管理">管理学习</a></li>
+				        
+							<li><a href="/tags/随笔">随笔杂文</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/管理/" style="font-size: 10px;">管理</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guowenfh.github.io/">三省吾身丶丶</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zhibinnet.com/">island的个人网站</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ienning.com/">Enning</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">某211的纯文科生，2018年毕业。热爱前端与Node.js。在学校的网站工作室中担任前端开发的工作，有实际项目经验。将来想成为一名前端工程师。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Lxxyx</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lxxyx</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">文科生の前端生活</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/前端">前端之路</a></li>
+		        
+					<li><a href="/tags/管理">管理学习</a></li>
+		        
+					<li><a href="/tags/随笔">随笔杂文</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-从零组装新工具 - Koa2" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/23/从零组装新工具 - Koa2/" class="article-date">
+  	<time datetime="2016-04-23T12:27:06.000Z" itemprop="datePublished">2016-04-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      从零组装新工具 - Koa2
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>整个项目已开源于Github，项目地址：<a href="https://github.com/Lxxyx/koa2-easy" target="_blank" rel="external">koa2-easy</a>，<a href="http://koa.ncuhr.win" target="_blank" rel="external">在线Demo:</a></p>
+</blockquote>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>作为一个前端，Node.js算是必备知识之一。同时因为自己需要做一些后台性的工作，或者完成一个小型应用。所以学习了Node的Express框架，用于辅助和加速开发。</p>
+<p>不过当初自己对Express的学习和了解，并不是很深入。要求也仅仅是停留在能发送静态文件，构建后台API，与数据库完成简单交互而已。所以当初自己选用Express时，靠的是<a href="http://www.expressjs.com.cn/starter/generator.html" target="_blank" rel="external">Express 应用生成器</a>，相当于Express的最佳实践。<br>在使用了一段时间之后，被Express的“回调地狱”，“自定义程度不高”等问题所困扰，于是决定更换至新的框架。</p>
+<p>在选择框架时，遵循了自己学习新技术的原则：</p>
+<blockquote>
+<p>要么找值得学习的，深入学习并理解。要么找适合当前业务，能快速解决问题的。不要在具体某某某个技术上纠结太久。</p>
+</blockquote>
+<p>这句话也是自己看余果大大的《Web全栈工程师的自我修养》这本书的体会。</p>
+<h2 id="选择Koa"><a href="#选择Koa" class="headerlink" title="选择Koa"></a>选择Koa</h2><p>在上面原则的指导下，很容易的就找到了一款符合自己需求的框架：Koa。<br>Koa因为应用了ES6的生成器语法，所以非常优雅的解决了Node.js的回调地狱问题。<br>比如说这样的Ajax代码，看起来就比回调函数的写法优雅很多。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = <span class="keyword">yield</span> request(<span class="string">"http://some.url"</span>);</span><br><span class="line">  <span class="keyword">var</span> resp = <span class="built_in">JSON</span>.parse(result);</span><br><span class="line">  <span class="built_in">console</span>.log(resp.value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  makeAjaxCall(url, <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">    it.next(response);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>例子来源： <a href="http://es6.ruanyifeng.com/#docs/generator#yield-语句" target="_blank" rel="external">Generator 函数</a></p>
+</blockquote>
+<p>虽然yield的写法有点奇怪，但还是可以接受的。</p>
+<h3 id="选择Koa2"><a href="#选择Koa2" class="headerlink" title="选择Koa2"></a>选择Koa2</h3><p>同时在Koa的github首页中，看到了Koa2。<br>Koa2应用了ES7的<code>Async/Await</code>来替代Koa1中的生成器函数与yield。<br>所以上一段代码的main函数，在Koa2里长这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = <span class="keyword">await</span> request(<span class="string">"http://some.url"</span>);</span><br><span class="line">  <span class="keyword">var</span> resp = <span class="built_in">JSON</span>.parse(result);</span><br><span class="line">  <span class="built_in">console</span>.log(resp.value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用了<code>Async/Await</code>后，整段代码是变的更加好看的。</p>
+<h3 id="理解Koa的中间件"><a href="#理解Koa的中间件" class="headerlink" title="理解Koa的中间件"></a>理解Koa的中间件</h3><p>在一开始学习Koa时，是不太理解Koa的中间件级联这个概念的。<br>就是下图这玩意。<br><img src="http://7xoxxe.com1.z0.glb.clouddn.com/koa.jpg" alt="中间件级联"></p>
+<p>这个算是Koa的核心概念了，不理解这个，只能安安心心继续用Express。</p>
+<p>还好自己平时爱去看各种开发大会的视频，来提升自己的眼界。所以昨晚正好在慕课网看到了《阿里D2前端技术论坛——2015融合》的大会视频，便开心的点开学习。<br>而第一篇《用 Node.js 构建海量页面渲染服务——by 不四》讲的就有Koa框架，还梳理了Koa的中间件级联这个概念。<br>在不四前辈介绍完Koa的中间件级联后，我发现自己好像理解了。<br>配合着自己之前学习的ES6知识，才发现原来是这样。<br>在这儿我贴一段代码和自己的理解，有兴趣的同学可以看一看。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">var</span> app = koa();</span><br><span class="line"></span><br><span class="line"><span class="comment">// x-response-time</span></span><br><span class="line"></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span> *(<span class="params">next</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 首先启动第一个中间件，记录下时间</span></span><br><span class="line">  <span class="keyword">var</span> start = <span class="keyword">new</span> <span class="built_in">Date</span>;</span><br><span class="line">  <span class="comment">// 进入中间件，并等待返回。</span></span><br><span class="line">  <span class="keyword">yield</span> next;</span><br><span class="line">  <span class="comment">// 返回后，代表操作已完成，记录结束时间并输出。</span></span><br><span class="line">  <span class="keyword">var</span> ms = <span class="keyword">new</span> <span class="built_in">Date</span> - start;</span><br><span class="line">  <span class="keyword">this</span>.set(<span class="string">'X-Response-Time'</span>, ms + <span class="string">'ms'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// response</span></span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span> *(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 最后一个中间件，将body写成'Hello World'</span></span><br><span class="line">  <span class="keyword">this</span>.body = <span class="string">'Hello World'</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure></p>
+<p>整个的流程，会是这样的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.middleware1 &#123;</span><br><span class="line">  <span class="comment">// (1) do some stuff</span></span><br><span class="line">  .middleware2 &#123;</span><br><span class="line">    <span class="comment">// (2) do some other stuff</span></span><br><span class="line">    .middleware3 &#123;</span><br><span class="line">      <span class="comment">// (3) NO next yield !</span></span><br><span class="line">      <span class="comment">// this.body = 'hello world'</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// (4) do some other stuff later</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// (5) do some stuff lastest and return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>至此，学习Koa的最后一个难关，也被攻克了。</p>
+<h2 id="从零组装Koa"><a href="#从零组装Koa" class="headerlink" title="从零组装Koa"></a>从零组装Koa</h2><p>因为对Express的学习和使用，知道了自己对于后台框架的真实需求。<br>所以这回决定不用Koa generator之内的工具，而是自己从零开始，组装一个适合自己的Koa框架。<br>基于Koa2，使用Async/Await，符合自己需求……<br>想想就是很美好的事情呀。</p>
+<h3 id="梳理需求"><a href="#梳理需求" class="headerlink" title="梳理需求"></a>梳理需求</h3><p>首先要做的，自然就是梳理自己的需求。看看到底需要什么东西。<br>于是翻出自己前两个月在使用的Express框架，确定了以下要点。</p>
+<ol>
+<li>路由，创建Rest Api</li>
+<li>发送静态HTML文件</li>
+<li>设置静态文件目录</li>
+<li>发送和读取JSON数据</li>
+<li>渲染模板</li>
+<li>使用ES6语法完成工作</li>
+</ol>
+<h3 id="实现需求"><a href="#实现需求" class="headerlink" title="实现需求"></a>实现需求</h3><p>具体的实现部分，这儿就不再赘述了。就是去github和npm上，寻找一个一个的包并组装在一起了而已。<br>整个项目的亮点就在于：完全符合个人需求，并且使用ES6来完成工作。对我个人而言，用ES6不仅看起来爽，也能提升我的工作效率。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这周因为胃肠炎，好像也没做啥事情……最大的事儿也只是组装了个Koa框架。<br>因为养病的原因，只能每天看看开发者大会的视频。因为肚子时不时的抽一下，真的很影响工作啊……</p>
+<p>今天感觉好了一点，希望病情早日康复~<br>就酱~</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/01/Always-bet-on-f2e/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Always bet on F2E
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/17/Vuex源码阅读笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vuex源码阅读笔记</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="从零组装新工具 - Koa2" data-title="从零组装新工具 - Koa2" data-url="http://www.lxxyx.win/2016/04/23/从零组装新工具 - Koa2/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Lxxyx"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Lxxyx
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71744638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+  </div>
+</body>
+</html>

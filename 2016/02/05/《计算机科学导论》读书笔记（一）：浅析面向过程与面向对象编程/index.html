@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程 | Lxxyx的前端乐园</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="《计算机科学导论》的来源仍记得那是15年的5月底，面临着毕业的学长学姐看着自己大学四年的诸多书籍，纷纷在校内开始了摆摊生活。当时才大一的我，看着一长条的书摊，仿佛看到了宝藏。才逛了一会儿，我心满意足的抱着好几本书回寝室了。其中就包括这两天看到入迷的《计算机科学导论》。
+当初买下它的时候，只是模糊的觉得，自己可能会用到。既然又是书，所以就爽快的买了下来。反正也才5元（逃）。回去一翻开，更是惊喜，书如">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程">
+<meta property="og:url" content="http://www.lxxyx.win/2016/02/05/《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程/index.html">
+<meta property="og:site_name" content="Lxxyx的前端乐园">
+<meta property="og:description" content="《计算机科学导论》的来源仍记得那是15年的5月底，面临着毕业的学长学姐看着自己大学四年的诸多书籍，纷纷在校内开始了摆摊生活。当时才大一的我，看着一长条的书摊，仿佛看到了宝藏。才逛了一会儿，我心满意足的抱着好几本书回寝室了。其中就包括这两天看到入迷的《计算机科学导论》。
+当初买下它的时候，只是模糊的觉得，自己可能会用到。既然又是书，所以就爽快的买了下来。反正也才5元（逃）。回去一翻开，更是惊喜，书如">
+<meta property="og:image" content="http://7xoxxe.com1.z0.glb.clouddn.com/jkdl.png">
+<meta property="og:updated_time" content="2016-05-27T10:45:31.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程">
+<meta name="twitter:description" content="《计算机科学导论》的来源仍记得那是15年的5月底，面临着毕业的学长学姐看着自己大学四年的诸多书籍，纷纷在校内开始了摆摊生活。当时才大一的我，看着一长条的书摊，仿佛看到了宝藏。才逛了一会儿，我心满意足的抱着好几本书回寝室了。其中就包括这两天看到入迷的《计算机科学导论》。
+当初买下它的时候，只是模糊的觉得，自己可能会用到。既然又是书，所以就爽快的买了下来。反正也才5元（逃）。回去一翻开，更是惊喜，书如">
+<meta name="twitter:image" content="http://7xoxxe.com1.z0.glb.clouddn.com/jkdl.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Lxxyx的前端乐园" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lxxyx</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">文科生の前端生活</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/前端">前端之路</a></li>
+				        
+							<li><a href="/tags/管理">管理学习</a></li>
+				        
+							<li><a href="/tags/随笔">随笔杂文</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/管理/" style="font-size: 10px;">管理</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guowenfh.github.io/">三省吾身丶丶</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zhibinnet.com/">island的个人网站</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ienning.com/">Enning</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">某211的纯文科生，2018年毕业。热爱前端与Node.js。在学校的网站工作室中担任前端开发的工作，有实际项目经验。将来想成为一名前端工程师。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Lxxyx</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lxxyx</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">文科生の前端生活</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/前端">前端之路</a></li>
+		        
+					<li><a href="/tags/管理">管理学习</a></li>
+		        
+					<li><a href="/tags/随笔">随笔杂文</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/02/05/《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程/" class="article-date">
+  	<time datetime="2016-02-05T04:06:41.000Z" itemprop="datePublished">2016-02-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随笔/">随笔</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="《计算机科学导论》的来源"><a href="#《计算机科学导论》的来源" class="headerlink" title="《计算机科学导论》的来源"></a>《计算机科学导论》的来源</h2><p>仍记得那是15年的5月底，面临着毕业的学长学姐看着自己大学四年的诸多书籍，纷纷在校内开始了摆摊生活。当时才大一的我，看着一长条的书摊，仿佛看到了宝藏。才逛了一会儿，我心满意足的抱着好几本书回寝室了。其中就包括这两天看到入迷的《计算机科学导论》。</p>
+<p>当初买下它的时候，只是模糊的觉得，自己可能会用到。既然又是书，所以就爽快的买了下来。反正也才5元（逃）。回去一翻开，更是惊喜，书如全新的一般，连名字都没有。然后……放在书柜上，就束之高阁了。直到寒假回家时，顺手把它带回了家。</p>
+<p>就是下图的这本书。</p>
+<p><img src="http://7xoxxe.com1.z0.glb.clouddn.com/jkdl.png" alt="计算机科学导论"></p>
+<p>结果昨天下午看了一眼，便一发不可收拾，一口气读到深夜两点。读完之后，感觉之前所有零散的知识点被串成了一串，有种拨云见月的感觉。之前很多无法理解的概念，也都迎刃而解了。</p>
+<p>看来无论是学习社会科学或计算机科学，都如杨绛先生所说的那句话一样：</p>
+<blockquote>
+<p>“你的问题主要在于读书不多而想得太多。”</p>
+</blockquote>
+<p>或者又如《荀子》一书中劝学篇所言：</p>
+<blockquote>
+<p>“吾尝终日而思矣，不如须臾之所学也；吾尝跂而望矣，不如登高之博见也。” </p>
+</blockquote>
+<p>总而言之，万分庆幸自己回家时候带了这本《计算机专业导论》，让我领略到计算机科学的万千精彩。</p>
+<h2 id="关于面向过程与面向对象的疑惑"><a href="#关于面向过程与面向对象的疑惑" class="headerlink" title="关于面向过程与面向对象的疑惑"></a>关于面向过程与面向对象的疑惑</h2><p>第一次学编程时，学习的是C语言。在刚开始学的时候，就知道C语言是一门面向过程的编程语言，除此之外还有面向对象的编程语言。当时的我，并没有想这么多。只是慢慢的看视频然后学习。</p>
+<p>面向过程与面向对象是学编程过程中不可避免的问题。果然，这个问题在15年3月份，我学习Java后开始出现了。</p>
+<p>当时在图书馆借阅了李刚老师的《疯狂Java 第二版》，在学习到面向对象部分，彻底晕头转向了。究竟什么是面向对象，什么又是面向过程？为什么说面向对象是一种良好编程方法？封装、继承、多态到底是什么？（这应该算自己第一次尝到计算机基础不牢的苦果，只是当时没有意识到）。</p>
+<p>在15年6月学前端，到现在已有大半年。期间也看过诸如《JavaScript面向对象编程》等书，也去谷歌过相关文档。但总感觉似懂非懂。</p>
+<p>还好，我碰见了《计算机专业导论》这本书，一本让我有“拨云见月”之感的书。</p>
+<h2 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程"></a>面向过程</h2><p>在这儿，我们先介绍面向过程。<br>在面向过程的程序中，我们把程序看成是 <code>操纵被动对象的活动主体</code>。其中，被动对象本身不能开始一个动作，但能从活动主体（程序）接收动作。<br>被动对象的数据储存在内存中，程序为了操纵它们，会发布动作。称之<code>过程</code>。</p>
+<p>例如打印一个文件，文件就是被动对象。同时为了能被打印，文件会存储在内存中。而程序为了打印文件，会调用一个print过程，print过程中包含了计算机打印所需的步骤。</p>
+<p>在过程式模式中，对象（文件）和过程（打印）是完全分开的实体。对象（文件）是能接收print动作的实体。而过程print是被编写的一个独立的实体，程序只是触发它。</p>
+<p>看到上面这一大串，是不是有点晕了？简单来说，面向过程模式的程序由三部分组成：</p>
+<ol>
+<li>对象创建部分</li>
+<li>一组过程调用</li>
+<li>每个过程的一组代码</li>
+</ol>
+<p>结合上面的例子，这样就比较好理解了。</p>
+<h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><p>面向对象模式与面向过程模式区别在于：面向对象模式处理活动对象，而非被动对象。如日常生活中的洗衣机，汽车等。 <em>在这些对象上执行的动作都包含在这些对象中</em>，对象只需要接收合适的外部刺激即可。</p>
+<p>还是拿打印文件做例子，在面向对象模式中的文件能把所有被文件执行的过程（面向对象中成为方法）（打印，复制粘贴等）打包在一起。在这种模式下，程序只需要向文件发出打印或者复制的请求，文件就会被打印或复制。而这些方法，也被从这些对象继承的其它对象共享。<br>比较面向过程与面向对象，可以看出面向过程编程中的过程是独立的实体，但面向对象模式中的方法是属于对象的。</p>
+<p>面向对象的核心要点，在于类。因为相同类型的对象需要一组方法，为了创建这些方法，C++或者Java都选择使用成为类的单元。</p>
+<h3 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h3><p>在面向对象模式中，作为本质，一个对象能从另外一个对象继承。这个概念称为<code>继承性</code>。例如，当一个几何形状类被定义后，我们就可以定义矩形类。矩形是拥有额外特性的几何形状。</p>
+<h3 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h3><p>面向对象的多态性是指我们可以定义一些具有相同名字操作的方法，但这些操作在不同类中会产生不同结果。<br>例如我们给几何图形类定义一个算面积的方法，同时定义圆形类和方形类继承几何图形类。那么同样是算面积，圆形类的结果和方形类的结果会不一样。因为两者计算公式不一样。<br>这就是多态。</p>
+<h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>本以为只是简单的描述一下自己对面向过程和面向对象的理解。结果写的时候却是磕磕绊绊。看来和老师说的一样，自己学的好和教别人教的好是两回事。还是得努力去加强这一方面。</p>
+<p>接下来可能会写好几篇《计算机专业导论》的读书笔记，因为解决了我颇多难点，所以算是值得一写。至于看的速度，我觉得算是较快的，因为计算机系统组成，计算机网络，算法等章节，我在之前就有过专门学习。只是没有一本书把知识点给串起来而已。</p>
+<p>前端路漫漫，且行且歌~</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/06/寒假前端学习/寒假前端学习(8)——理解CSS浮动与清除浮动/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          寒假前端学习(8)——理解CSS浮动与清除浮动
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/02/03/计科之路--Start!/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">计科之路--Start!</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程" data-title="《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程" data-url="http://www.lxxyx.win/2016/02/05/《计算机科学导论》读书笔记（一）：浅析面向过程与面向对象编程/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Lxxyx"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Lxxyx
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71744638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+  </div>
+</body>
+</html>

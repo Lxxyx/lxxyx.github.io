@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>深入理解JavaScript类数组 | Lxxyx的前端乐园</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="起因写这篇博客的起因，是我在知乎上回答一个问题时，说自己在学前端时把《JavaScript高级程序设计》看了好几遍。于是在评论区中，出现了如下的对话：
+天啦噜，这话说的，宝宝感觉到的，是满满的恶意啊。还好自己的JavaScript基础还算不错，没被打脸。（吐槽一句：知乎少部分人真的是恶意度爆表，整天想着打别人的脸。都是搞技术的，和善一点不行吗…………）
+不过这个话题也引起了我的注意，问了问身边很多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解JavaScript类数组">
+<meta property="og:url" content="http://www.lxxyx.win/2016/05/07/深入理解JavaScript类数组/index.html">
+<meta property="og:site_name" content="Lxxyx的前端乐园">
+<meta property="og:description" content="起因写这篇博客的起因，是我在知乎上回答一个问题时，说自己在学前端时把《JavaScript高级程序设计》看了好几遍。于是在评论区中，出现了如下的对话：
+天啦噜，这话说的，宝宝感觉到的，是满满的恶意啊。还好自己的JavaScript基础还算不错，没被打脸。（吐槽一句：知乎少部分人真的是恶意度爆表，整天想着打别人的脸。都是搞技术的，和善一点不行吗…………）
+不过这个话题也引起了我的注意，问了问身边很多">
+<meta property="og:image" content="http://7xoxxe.com1.z0.glb.clouddn.com/array3.png">
+<meta property="og:updated_time" content="2016-05-27T10:45:31.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解JavaScript类数组">
+<meta name="twitter:description" content="起因写这篇博客的起因，是我在知乎上回答一个问题时，说自己在学前端时把《JavaScript高级程序设计》看了好几遍。于是在评论区中，出现了如下的对话：
+天啦噜，这话说的，宝宝感觉到的，是满满的恶意啊。还好自己的JavaScript基础还算不错，没被打脸。（吐槽一句：知乎少部分人真的是恶意度爆表，整天想着打别人的脸。都是搞技术的，和善一点不行吗…………）
+不过这个话题也引起了我的注意，问了问身边很多">
+<meta name="twitter:image" content="http://7xoxxe.com1.z0.glb.clouddn.com/array3.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Lxxyx的前端乐园" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lxxyx</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">文科生の前端生活</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/前端">前端之路</a></li>
+				        
+							<li><a href="/tags/管理">管理学习</a></li>
+				        
+							<li><a href="/tags/随笔">随笔杂文</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/管理/" style="font-size: 10px;">管理</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guowenfh.github.io/">三省吾身丶丶</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zhibinnet.com/">island的个人网站</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ienning.com/">Enning</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">某211的纯文科生，2018年毕业。热爱前端与Node.js。在学校的网站工作室中担任前端开发的工作，有实际项目经验。将来想成为一名前端工程师。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Lxxyx</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lxxyx</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">文科生の前端生活</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/前端">前端之路</a></li>
+		        
+					<li><a href="/tags/管理">管理学习</a></li>
+		        
+					<li><a href="/tags/随笔">随笔杂文</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-深入理解JavaScript类数组" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/07/深入理解JavaScript类数组/" class="article-date">
+  	<time datetime="2016-05-07T02:28:49.000Z" itemprop="datePublished">2016-05-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      深入理解JavaScript类数组
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>写这篇博客的起因，是我在知乎上回答一个问题时，说自己在学前端时把《JavaScript高级程序设计》看了好几遍。<br>于是在评论区中，出现了如下的对话：<br><img src="http://7xoxxe.com1.z0.glb.clouddn.com/array3.png" alt="对话"></p>
+<p>天啦噜，这话说的，宝宝感觉到的，是满满的恶意啊。还好自己的JavaScript基础还算不错，没被打脸。（吐槽一句：知乎少部分人真的是恶意度爆表，整天想着打别人的脸。都是搞技术的，和善一点不行吗…………）</p>
+<p>不过这个话题也引起了我的注意，问了问身边很多前端同学关于数组与类数组的区别。他们都表示不太熟悉，所以决定写一篇博客，来分享我对数组与类数组的理解。</p>
+<h2 id="什么是类数组"><a href="#什么是类数组" class="headerlink" title="什么是类数组"></a>什么是类数组</h2><p>类数组的定义，只有一条：<br>  有length属性。</p>
+<p>这儿有三个典型的JavaScript类数组例子。</p>
+<ol>
+<li>DOM方法:</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取所有div</span></span><br><span class="line"><span class="keyword">let</span> arrayLike = <span class="built_in">document</span>.querySelectorAll(<span class="string">'div'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(arrayLike))  <span class="comment">// [object NodeList]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arrayLike.length) <span class="comment">// 127</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arrayLike[<span class="number">0</span>]) </span><br><span class="line"><span class="comment">// &lt;div id="js-pjax-loader-bar" class="pjax-loader-bar"&gt;&lt;/div&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.isArray(arrayLike)) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">arrayLike.push(<span class="string">'push'</span>) </span><br><span class="line"><span class="comment">// Uncaught TypeError: arrayLike.push is not a function(…)</span></span><br></pre></td></tr></table></figure>
+<p>是的，这个arrayLike的 <code>NodeList</code>，有length，也能用数组下标访问，但是使用Array.isArray测试时，却告诉我们它不是数组。直接使用push方法时，当然也会报错。<br>但是，我们可以借用类数组方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = <span class="built_in">Array</span>.prototype.slice.call(arrayLike, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.isArray(arr)) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">arr.push(<span class="string">'push something to arr'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(arr[arr.length - <span class="number">1</span>]) <span class="comment">// push something to arr</span></span><br></pre></td></tr></table></figure>
+<p>不难看出，此时的arrayLike在调用数组原型方法时，返回值已经转化成数组了。也能正常使用数组的方法。</p>
+<ol>
+<li>类数组对象</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arrayLikeObj = &#123;</span><br><span class="line">  length: <span class="number">2</span>,</span><br><span class="line">  <span class="number">0</span>: <span class="string">'This is Array Like Object'</span>,</span><br><span class="line">  <span class="number">1</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(arrayLikeObj.length) <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">console</span>.log(arrayLikeObj[<span class="number">0</span>]) <span class="comment">// This is Array Like Object</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.isArray(arrayLikeObj)) <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arrObj = <span class="built_in">Array</span>.prototype.slice.call(arrayLikeObj, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Array</span>.isArray(arrObj)) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>这个例子也很好理解。一个对象，加入了length属性，再用Array的原型方法处理一下，摇身一变成为了真的数组。</p>
+<ol>
+<li>类数组函数</li>
+</ol>
+<p>这个应该算是最好玩，也是最迷惑人的类数组对象了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arrayLikeFunc1 = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arrayLikeFunc1.length) <span class="comment">// 0</span></span><br><span class="line"><span class="keyword">let</span> arrFunc1 = <span class="built_in">Array</span>.prototype.slice.call(arrayLikeFunc1, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(arrFunc1, arrFunc1.length) <span class="comment">// ([], 0)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arrayLikeFunc2 = <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arrayLikeFunc2.length) <span class="comment">// 2</span></span><br><span class="line"><span class="keyword">let</span> arrFunc2 = <span class="built_in">Array</span>.prototype.slice.call(arrayLikeFunc2, <span class="number">0</span>)</span><br><span class="line"><span class="built_in">console</span>.log(arrFunc2, arrFunc2.length) <span class="comment">// ([undefined × 2], 2)</span></span><br></pre></td></tr></table></figure>
+<p>可以看出，<strong>函数也有length属性，其值等于函数要接收的参数。</strong></p>
+<blockquote>
+<p>注：不适用于ES6的rest参数。具体原因和表现这儿就不再阐述了，不属于本文讨论范围。可参见 <a href="http://es6.ruanyifeng.com/#docs/function#rest参数" target="_blank" rel="external">《rest参数 - ECMAScript 6 入门》</a>。另外arguments在ES6中，被rest参数代替了，所以这儿不作为例子。</p>
+</blockquote>
+<p>而length属性大于0时，如果转为数组，则数组里的值会是undefined。个数等于函数length的长度。</p>
+<h2 id="类数组的实现原理"><a href="#类数组的实现原理" class="headerlink" title="类数组的实现原理"></a>类数组的实现原理</h2><p>类数组的实现原理，主要有以下两点：<br>第一点是JavaScript的“万物皆对象”概念。<br>第二点则是JavaScript支持的“鸭子类型”。</p>
+<p>首先，从第一点开始解释。</p>
+<h3 id="万物皆对象"><a href="#万物皆对象" class="headerlink" title="万物皆对象"></a>万物皆对象</h3><p>万物皆对象具体解释如下：</p>
+<blockquote>
+<p>在JavaScript中，“一切皆对象”，数组和函数本质上都是对象，就连三种原始类型的值——数值、字符串、布尔值——在一定条件下，也会自动转为对象，也就是原始类型的“包装对象”。</p>
+</blockquote>
+<p>而另外一个要点则是，所有对象都继承于Object。所以都能调用对象的方法，比如使用点和方括号访问属性。<br>比如说，这样的：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> func = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="built_in">console</span>.log(func <span class="keyword">instanceof</span> <span class="built_in">Object</span>) <span class="comment">// true</span></span><br><span class="line">func[<span class="number">0</span>] = <span class="string">'I\'m a func'</span></span><br><span class="line"><span class="built_in">console</span>.log(func[<span class="number">0</span>]) <span class="comment">// 'I\'m a func'</span></span><br></pre></td></tr></table></figure>
+<h3 id="鸭子类型"><a href="#鸭子类型" class="headerlink" title="鸭子类型"></a>鸭子类型</h3><p>万物皆对象具体解释如下：</p>
+<blockquote>
+<p>如果它走起来像鸭子，而且叫起来像鸭子，那么它就是鸭子。</p>
+</blockquote>
+<p>比如说上面举的类数组例子，虽然他们是对象/函数，但是只要有length属性，能当数组用，那么他们就是数组。<br>是什么，不是什么对鸭子类型来说，一点也不重要。能做什么，才是鸭子类型的核心。（谢谢nightre大大的指正）</p>
+<p>但是，在这儿，还是有些迷糊的。为什么使用<code>call/apply</code>借用数组方法就能处理这些类数组呢？</p>
+<h2 id="探秘V8"><a href="#探秘V8" class="headerlink" title="探秘V8"></a>探秘V8</h2><p>一开始，我也对这个犯迷糊啊。直到我去Github上，看到了谷歌V8引擎处理数组的源代码。<br>地址在这儿：<a href="https://github.com/v8/v8/blob/master/src/js/array.js" target="_blank" rel="external">v8/array.js</a><br>作为讲述，我们在这里引用push的源代码（方便讲述，删除部分。slice的比较长，但是原理一致）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Appends the arguments to the end of the array and returns the new</span></span><br><span class="line"><span class="comment">// length of the array. See ECMA-262, section 15.4.4.7.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ArrayPush</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 获取要处理的数组</span></span><br><span class="line">  <span class="keyword">var</span> array = TO_OBJECT(<span class="keyword">this</span>);</span><br><span class="line">  <span class="comment">// 获取数组长度</span></span><br><span class="line">  <span class="keyword">var</span> n = TO_LENGTH(array.length);</span><br><span class="line">  <span class="comment">// 获取函数参数长度</span></span><br><span class="line">  <span class="keyword">var</span> m = <span class="built_in">arguments</span>.length;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">    <span class="comment">// 将函数参数push进数组</span></span><br><span class="line">    array[i+n] = <span class="built_in">arguments</span>[i];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 修正数组长度</span></span><br><span class="line">  <span class="keyword">var</span> new_length = n + m;</span><br><span class="line">  array.length = new_length;</span><br><span class="line">  <span class="comment">// 返回值是数组的长度</span></span><br><span class="line">  <span class="keyword">return</span> new_length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>是的，<strong>整个push函数，并没有涉及是否是数组的问题。只关心了length。而因为其对象的特性，所以可以使用方括号来设置属性。</strong></p>
+<p>这也是万物皆类型和鸭子类型最生动的体现。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>JavaScript中的类数组的特殊性，是由其“万物皆类型”和“鸭子类型”决定的，而浏览器引擎底层的实现，更是佐证了这一点。<br>而先前说我的那位同学，因为只是知道类数组的几种表现和用法，并且想通过apply来打我脸，证明我根本没有仔细看书。这种行为不仅不友善，而且学习效率也不高。<br>因为，<strong>知其然而不知其所以然是不可取的</strong>。特别是发现很多这种例子，就得学会归纳总结。（感谢winter老师的演讲：<a href="http://taobaofed.org/blog/2016/03/23/the-growth-of-front-end/" target="_blank" rel="external">一个前端的自我修养</a>，教会我很多东西。）。<br>很多时候，深入看看源代码也会让你对这个理解的更透彻。将来就算是蹦出一百种类数组，也能知道是怎么回事儿。</p>
+<p>最后，还是开头那句话：“都是搞技术的，和善一点不行吗？有问题就好好交流，不要总想着打别人脸啊…………”</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/05/21/备战期末考试，暑期再见/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          备战期末考试，暑期再见~
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/01/Always-bet-on-f2e/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Always bet on F2E</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="深入理解JavaScript类数组" data-title="深入理解JavaScript类数组" data-url="http://www.lxxyx.win/2016/05/07/深入理解JavaScript类数组/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Lxxyx"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Lxxyx
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71744638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+  </div>
+</body>
+</html>

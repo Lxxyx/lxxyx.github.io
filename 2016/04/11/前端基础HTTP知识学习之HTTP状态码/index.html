@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>前端基础HTTP知识学习之HTTP状态码 | Lxxyx的前端乐园</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="起因之前我在我的2016，寒假前端学习计划中，发现自己对HTTP的知识很不熟悉。而作为一个前端，应该对HTTP知识了如指掌。这也是三月份我在找实习的过程中，和几家公司的CTO交流中，他们给我的指点与建议。很感激他们对我的帮助，让我了解到自己知识的漏洞。在补习HTTP相关知识的时候，我手头上有两本书，一本是《图解HTTP》，另外一本是《HTTP权威指南》。在这儿比较推荐前端初学者，去看《图解HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端基础HTTP知识学习之HTTP状态码">
+<meta property="og:url" content="http://www.lxxyx.win/2016/04/11/前端基础HTTP知识学习之HTTP状态码/index.html">
+<meta property="og:site_name" content="Lxxyx的前端乐园">
+<meta property="og:description" content="起因之前我在我的2016，寒假前端学习计划中，发现自己对HTTP的知识很不熟悉。而作为一个前端，应该对HTTP知识了如指掌。这也是三月份我在找实习的过程中，和几家公司的CTO交流中，他们给我的指点与建议。很感激他们对我的帮助，让我了解到自己知识的漏洞。在补习HTTP相关知识的时候，我手头上有两本书，一本是《图解HTTP》，另外一本是《HTTP权威指南》。在这儿比较推荐前端初学者，去看《图解HTTP">
+<meta property="og:image" content="http://7xoxxe.com1.z0.glb.clouddn.com/httppic.png">
+<meta property="og:updated_time" content="2016-05-27T10:45:31.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端基础HTTP知识学习之HTTP状态码">
+<meta name="twitter:description" content="起因之前我在我的2016，寒假前端学习计划中，发现自己对HTTP的知识很不熟悉。而作为一个前端，应该对HTTP知识了如指掌。这也是三月份我在找实习的过程中，和几家公司的CTO交流中，他们给我的指点与建议。很感激他们对我的帮助，让我了解到自己知识的漏洞。在补习HTTP相关知识的时候，我手头上有两本书，一本是《图解HTTP》，另外一本是《HTTP权威指南》。在这儿比较推荐前端初学者，去看《图解HTTP">
+<meta name="twitter:image" content="http://7xoxxe.com1.z0.glb.clouddn.com/httppic.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Lxxyx的前端乐园" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lxxyx</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">文科生の前端生活</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/前端">前端之路</a></li>
+				        
+							<li><a href="/tags/管理">管理学习</a></li>
+				        
+							<li><a href="/tags/随笔">随笔杂文</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/管理/" style="font-size: 10px;">管理</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guowenfh.github.io/">三省吾身丶丶</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zhibinnet.com/">island的个人网站</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ienning.com/">Enning</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">某211的纯文科生，2018年毕业。热爱前端与Node.js。在学校的网站工作室中担任前端开发的工作，有实际项目经验。将来想成为一名前端工程师。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Lxxyx</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lxxyx</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">文科生の前端生活</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/前端">前端之路</a></li>
+		        
+					<li><a href="/tags/管理">管理学习</a></li>
+		        
+					<li><a href="/tags/随笔">随笔杂文</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-前端基础HTTP知识学习之HTTP状态码" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/11/前端基础HTTP知识学习之HTTP状态码/" class="article-date">
+  	<time datetime="2016-04-11T01:05:51.000Z" itemprop="datePublished">2016-04-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端基础HTTP知识学习之HTTP状态码
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>之前我在我的<a href="http://t.cn/RqfwmLi" target="_blank" rel="external">2016，寒假前端学习计划</a>中，发现自己对HTTP的知识很不熟悉。而作为一个前端，应该对HTTP知识了如指掌。<br>这也是三月份我在找实习的过程中，和几家公司的CTO交流中，他们给我的指点与建议。很感激他们对我的帮助，让我了解到自己知识的漏洞。<br>在补习HTTP相关知识的时候，我手头上有两本书，一本是《图解HTTP》，另外一本是《HTTP权威指南》。<br>在这儿比较推荐前端初学者，去看《图解HTTP》这本书。<br><img src="http://7xoxxe.com1.z0.glb.clouddn.com/httppic.png" alt="《图解HTTP》"><br>就是图里这本书，整本书深入浅出，书里面的图示非常多。所以整本书读下来非常轻松，却又能恰好掌握HTTP的基础知识。所以我在读的时候，一口气记了十几页的笔记。</p>
+<p>那学习HTTP知识，最大的好处就是当前后端交互出错时，至少知道是前端的问题还是后台的问题。这样能省下很多扯皮的时间。（对于我来说）</p>
+<h2 id="HTTP与前端"><a href="#HTTP与前端" class="headerlink" title="HTTP与前端"></a>HTTP与前端</h2><p>既然作为HTTP的基础知识，我们这儿就不介绍HTTP的起源，发展，与TCP/IP啥啥啥的关系了，有兴趣的同学可以自己看《图解HTTP》或者《计算机网络》这本书。<br>作为前端，最多接触的HTTP知识是什么？我认为，是状态码。<br>作为一个前端，使用Ajax完成前后端交互，通过Chrome控制台的Network来看资源加载情况等事情，简直和家常便饭一样。<br>比如说，看到 <code>404</code> 就知道这个资源没能加载出来，而看到<code>200</code>就知道这次加载稳了。<br>曾经的我，对于HTTP实际应用的大概了解，就只有这些了。但是这些还不够呀。所以在看完《图解HTTP》时，就过来分享一些我HTTP知识的盲点，希望能对大家有所帮助。</p>
+<h2 id="HTTP常见状态码分类"><a href="#HTTP常见状态码分类" class="headerlink" title="HTTP常见状态码分类"></a>HTTP常见状态码分类</h2><p>大家都知道，在进行请求时，会产生各种各样的HTTP状态码，所以在这儿，首先要介绍的就是HTTP的常见状态码。<br>最常见的，就是HTTP 2XX - 5XX了。<br>这儿，我列了一个表格，来描述</p>
+<table>
+<thead>
+<tr>
+<th>HTTP状态码</th>
+<th style="text-align:center">状态码</th>
+<th style="text-align:right">原因解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2xx</td>
+<td style="text-align:center">成功</td>
+<td style="text-align:right">请求正常处理完毕</td>
+</tr>
+<tr>
+<td>3xx</td>
+<td style="text-align:center">重定向</td>
+<td style="text-align:right">需要附加操作</td>
+</tr>
+<tr>
+<td>4xx</td>
+<td style="text-align:center">客户端错误</td>
+<td style="text-align:right">服务器无法处理请求</td>
+</tr>
+<tr>
+<td>5xx</td>
+<td style="text-align:center">服务器错误</td>
+<td style="text-align:right">服务器处理请求出错</td>
+</tr>
+</tbody>
+</table>
+<p>关于各种状态码的意义，在这儿就一目了然了，比如说，发生<code>4XX</code>时，一般是前端的锅。发生<code>5XX</code>时则是后台的锅。<br>当要设置页面重定向时，应该设置<code>3XX</code>的状态码，而不是在原网页上使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">location.href = <span class="string">'http://xxxxx'</span></span><br></pre></td></tr></table></figure></p>
+<p>这种方式。（别笑，真的见过这样的……）</p>
+<h2 id="常见状态码"><a href="#常见状态码" class="headerlink" title="常见状态码"></a>常见状态码</h2><p>这儿，我将会记下几个常见的状态码，虽然《图解HTTP》这本书提供了14个常见的HTTP状态码，但是对我来说，可能知识盲点和常见的也就那几个。<br>所以这儿就着重介绍他们，如果想了解详细的，各位可以自行借阅或购买《HTTP权威指南》这本书，绝对满足你的需求。</p>
+<h3 id="2XX-成功"><a href="#2XX-成功" class="headerlink" title="2XX - 成功"></a>2XX - 成功</h3><p>在这儿，首先介绍的是HTTP 200，200的意思很好理解，就是客户端的请求已被处理完毕。</p>
+<h4 id="204-No-Content"><a href="#204-No-Content" class="headerlink" title="204 - No Content"></a>204 - No Content</h4><p>这个呢，代表服务器请求已被成功处理，但是返回的结果中，是不带实体信息的。</p>
+<h4 id="206-Partial-Content"><a href="#206-Partial-Content" class="headerlink" title="206 - Partial Content"></a>206 - Partial Content</h4><p>表示范围请求，既返回的实体信息只是一部分。比如，返回某张照片的下半部分，某个文本的最后几行。用得好的话，可以大大节省网络传输的流量，达到指哪打哪的效果。</p>
+<h3 id="3XX-重定向"><a href="#3XX-重定向" class="headerlink" title="3XX - 重定向"></a>3XX - 重定向</h3><p>这部分，其实是有点绕的。不过仔细看看，想一想也能很好的分辨。</p>
+<h4 id="301-永久重定向"><a href="#301-永久重定向" class="headerlink" title="301 - 永久重定向"></a>301 - 永久重定向</h4><p>永久重定向，告诉客户端以后应从新地址访问。同时书签（如果有的话）也应该更换为新地址。</p>
+<h4 id="302-临时重定向"><a href="#302-临时重定向" class="headerlink" title="302 - 临时重定向"></a>302 - 临时重定向</h4><p>告诉客户端我换了位置了，但你还可以用这个地址来访问。现在基本重定向，返回的都是<code>302</code>状态码。</p>
+<h4 id="303-临时重定向-POST请求改为GET"><a href="#303-临时重定向-POST请求改为GET" class="headerlink" title="303 - 临时重定向 - POST请求改为GET"></a>303 - 临时重定向 - POST请求改为GET</h4><p>对于POST请求，它表示请求已经被处理，客户端可以<strong>接着使用GET方法</strong>去请求Location里的URI。</p>
+<h4 id="307-临时重定向-POST请求不变"><a href="#307-临时重定向-POST请求不变" class="headerlink" title="307 - 临时重定向 - POST请求不变"></a>307 - 临时重定向 - POST请求不变</h4><p>对于POST请求，表示请求还没有被处理，客户端应该向Location里的URI重新发起<strong>POST</strong>请求。</p>
+<h4 id="304-Not-Modified"><a href="#304-Not-Modified" class="headerlink" title="304 - Not Modified"></a>304 - Not Modified</h4><p>这个算是很重要的状态码，常见于网站的缓存处理中。<br>这儿，我摘抄了维基百科的解释：</p>
+<blockquote>
+<p>如果客户端发送了一个带条件的GET请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个状态码。</p>
+</blockquote>
+<p><code>304</code>的作用，还是很大的。简单点说就是：我给你发送请求，查看我本地这个资源是否是最新的，如果是，服务器就返回304。浏览器从本地读取缓存，而不用去服务器上请求资源。<br>想深入了解的话，可以阅读这篇文章： <a href="http://www.cnblogs.com/ziyunfei/archive/2012/11/17/2772729.html" target="_blank" rel="external">[译]理解HTTP/304响应</a></p>
+<h3 id="4XX-客户端错误"><a href="#4XX-客户端错误" class="headerlink" title="4XX - 客户端错误"></a>4XX - 客户端错误</h3><p>这部分属于客户端错误，也就是说如果出错了，很大可能是前端的锅。</p>
+<h4 id="400-Bad-Request"><a href="#400-Bad-Request" class="headerlink" title="400 - Bad Request"></a>400 - Bad Request</h4><p>该状态码表示请求报文存在语法错误，需要修改。</p>
+<h4 id="401-Unauthorized"><a href="#401-Unauthorized" class="headerlink" title="401 - Unauthorized"></a>401 - Unauthorized</h4><p>代表请求未经认证，不给过。</p>
+<h4 id="403-Forbidden"><a href="#403-Forbidden" class="headerlink" title="403 - Forbidden"></a>403 - Forbidden</h4><p>服务器拒绝请求，但是不想告诉你理由。</p>
+<h4 id="404-Not-Found"><a href="#404-Not-Found" class="headerlink" title="404 - Not Found"></a>404 - Not Found</h4><p>哈哈，这个就是大名鼎鼎的HTTP 404 Not Found 状态码。<br>这个状态码有两层意思，第一层是<strong>请求的资源未找到</strong>,第二层则是和HTTP 403一样，服务器拒绝请求，但是不想告诉你理由。</p>
+<h3 id="5XX-服务器错误"><a href="#5XX-服务器错误" class="headerlink" title="5XX - 服务器错误"></a>5XX - 服务器错误</h3><p>这部分属于服务器错误，也就是说如果出错了，则是后台的锅。</p>
+<h4 id="500-Internal-Server-Error"><a href="#500-Internal-Server-Error" class="headerlink" title="500 - Internal Server Error"></a>500 - Internal Server Error</h4><p>Internal Server Error翻译成中文就是服务器处理请求出错。也就是后台那儿出了问题，所以发送了500给你。<br>这种时候，放心的找后台报BUG去吧。</p>
+<h4 id="503-Service-Unavailable"><a href="#503-Service-Unavailable" class="headerlink" title="503 - Service Unavailable"></a>503 - Service Unavailable</h4><p>这个状态码，则是告诉你现在服务器暂时无法处理你的请求，你待会儿再试试。<br>当然，出现这种问题，一般也可以直接找后台。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>今天所写的HTTP状态码，只是HTTP整个知识的一部分，但却很重要。熟悉常见的HTTP状态码，能帮我们快速定位问题，同时如果你是后台，给出正确的HTTP状态码，也方便自己将来DEBUG。</p>
+<p>话说这儿得吐槽一句，那就是七牛的图片上传工具不太方便。在Windows下还好，有个图形界面，自动监控文件夹内容就自动上传的。<br>但是在Mac和Linux下只有纯命令行界面的工具。很是不方便。于是在写这篇博客时，自己用Gulp写了个小工具，专门配合七牛的Node.js SDK，实现自动监控文件变化并上传。<br>怎么说，既然选择做程序员，那么能让电脑帮你完成的，就不要动手啦。<br>况且，这个博客从配置完成的那一天起，我就基本没有折腾过。因为只是想安安静静的写博客而已，目前HEXO和这个主题的效果就挺好的。博客博客，最重要的还是里面的内容。</p>
+<p>就酱~</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/16/ES6学习之解构赋值/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          ES6学习之解构赋值
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/06/博客将于近期恢复更新/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">博客将于近期恢复更新</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="前端基础HTTP知识学习之HTTP状态码" data-title="前端基础HTTP知识学习之HTTP状态码" data-url="http://www.lxxyx.win/2016/04/11/前端基础HTTP知识学习之HTTP状态码/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Lxxyx"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Lxxyx
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71744638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+  </div>
+</body>
+</html>

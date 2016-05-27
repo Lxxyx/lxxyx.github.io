@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>ES6学习之解构赋值 | Lxxyx的前端乐园</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文选自我在SegmentFault的#21天阅读分享#中，所记录的两篇笔记。因为对自己帮助较大，所以分享在此。
+
+起因前两天在项目中，需要应用到vuex（类似redux的状态管理工具）。而vuex中，关于变量的赋值是ES6中的解构赋值。恰巧今天在看犀牛书时，也看到了关于解构赋值的介绍，所以今天准备专门学习解构赋值。
+解构赋值之前我们声明变量，是这样的：12var one = 1;var two">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6学习之解构赋值">
+<meta property="og:url" content="http://www.lxxyx.win/2016/04/16/ES6学习之解构赋值/index.html">
+<meta property="og:site_name" content="Lxxyx的前端乐园">
+<meta property="og:description" content="本文选自我在SegmentFault的#21天阅读分享#中，所记录的两篇笔记。因为对自己帮助较大，所以分享在此。
+
+起因前两天在项目中，需要应用到vuex（类似redux的状态管理工具）。而vuex中，关于变量的赋值是ES6中的解构赋值。恰巧今天在看犀牛书时，也看到了关于解构赋值的介绍，所以今天准备专门学习解构赋值。
+解构赋值之前我们声明变量，是这样的：12var one = 1;var two">
+<meta property="og:updated_time" content="2016-05-27T10:45:31.637Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6学习之解构赋值">
+<meta name="twitter:description" content="本文选自我在SegmentFault的#21天阅读分享#中，所记录的两篇笔记。因为对自己帮助较大，所以分享在此。
+
+起因前两天在项目中，需要应用到vuex（类似redux的状态管理工具）。而vuex中，关于变量的赋值是ES6中的解构赋值。恰巧今天在看犀牛书时，也看到了关于解构赋值的介绍，所以今天准备专门学习解构赋值。
+解构赋值之前我们声明变量，是这样的：12var one = 1;var two">
+  
+    <link rel="alternative" href="/atom.xml" title="Lxxyx的前端乐园" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Lxxyx</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">文科生の前端生活</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+							<li><a href="/tags/前端">前端之路</a></li>
+				        
+							<li><a href="/tags/管理">管理学习</a></li>
+				        
+							<li><a href="/tags/随笔">随笔杂文</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+					        
+								<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/前端/" style="font-size: 20px;">前端</a> <a href="/tags/管理/" style="font-size: 10px;">管理</a> <a href="/tags/随笔/" style="font-size: 15px;">随笔</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://guowenfh.github.io/">三省吾身丶丶</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.zhibinnet.com/">island的个人网站</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://ienning.com/">Enning</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">某211的纯文科生，2018年毕业。热爱前端与Node.js。在学校的网站工作室中担任前端开发的工作，有实际项目经验。将来想成为一名前端工程师。</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Lxxyx</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://7xk109.com1.z0.glb.clouddn.com/blog-head.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Lxxyx</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">文科生の前端生活</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/tags/前端">前端之路</a></li>
+		        
+					<li><a href="/tags/管理">管理学习</a></li>
+		        
+					<li><a href="/tags/随笔">随笔杂文</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/Lxxyx" title="github">github</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/Lxxyx" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="mailto:Lxxyxzj@gmail.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-ES6学习之解构赋值" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/04/16/ES6学习之解构赋值/" class="article-date">
+  	<time datetime="2016-04-16T12:53:29.000Z" itemprop="datePublished">2016-04-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ES6学习之解构赋值
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>本文选自我在SegmentFault的#21天阅读分享#中，所记录的两篇笔记。<br>因为对自己帮助较大，所以分享在此。</p>
+</blockquote>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>前两天在项目中，需要应用到vuex（类似redux的状态管理工具）。而vuex中，关于变量的赋值是ES6中的解构赋值。<br>恰巧今天在看犀牛书时，也看到了关于解构赋值的介绍，所以今天准备专门学习解构赋值。</p>
+<h2 id="解构赋值"><a href="#解构赋值" class="headerlink" title="解构赋值"></a>解构赋值</h2><p>之前我们声明变量，是这样的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> one = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">var</span> two = <span class="number">2</span>;</span><br></pre></td></tr></table></figure></p>
+<p>这种变量声明的方式，写的少了还好说。写多了，却会感觉繁琐。也容易出错。<br>而ES6中，关于解构赋值的写法，是这样的：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> [one, two] = [<span class="number">1</span>, <span class="number">2</span>]</span><br><span class="line"><span class="built_in">console</span>.log(one)</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="built_in">console</span>.log(two)</span><br><span class="line"><span class="comment">// 2</span></span><br></pre></td></tr></table></figure></p>
+<p>这样的话，一次性就命名了两个变量。<br>但只是这样的话，功能其实是不够用的。<br>结构赋值还支持如下的形式：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> [one,,three,] = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="built_in">console</span>.log(three)</span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure></p>
+<p>这种方式，可以留空位，从而是变量赋值达到精准的要求。<br>在阮一峰老师的ES6文档中，关于解构赋值有这么一句：</p>
+<blockquote>
+<p>解构赋值可以方便地将一组参数与变量名对应起来。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 参数是一组有次序的值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">[x, y, z]</span>) </span>&#123; ... &#125;</span><br><span class="line">f([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">// 参数是一组无次序的值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params">&#123;x, y, z&#125;</span>) </span>&#123; ... &#125;</span><br><span class="line">f(&#123;z: <span class="number">3</span>, y: <span class="number">2</span>, x: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+<p>现在看来，只是把传入的dispatch参数，给解构赋值了。</p>
+<h2 id="对象的解构赋值"><a href="#对象的解构赋值" class="headerlink" title="对象的解构赋值"></a>对象的解构赋值</h2><p>先写一个demo。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; foo, bar &#125; = &#123;</span><br><span class="line">  foo: <span class="string">"Hi i'm foo"</span>,</span><br><span class="line">  bar: <span class="string">"Hi i'm bar"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(foo)</span><br><span class="line"><span class="comment">// "Hi i'm foo"</span></span><br><span class="line"><span class="built_in">console</span>.log(bar)</span><br><span class="line"><span class="comment">// "Hi i'm bar"</span></span><br></pre></td></tr></table></figure></p>
+<p>对象的属性没有次序，变量必须与属性同名，才能取到正确的值。<br>在这儿，我设置了foo和bar，自然就取到了相应的变量。<br>但是如果要名字不一样呢？<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; foo: Anotherfoo, bar: Anotherbar &#125; = &#123;</span><br><span class="line">  foo: <span class="string">"Hi i'm foo"</span>,</span><br><span class="line">  bar: <span class="string">"Hi i'm bar"</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(Anotherfoo)</span><br><span class="line"><span class="string">"Hi i'm foo"</span></span><br><span class="line"><span class="built_in">console</span>.log(Anotherbar)</span><br><span class="line"><span class="string">"Hi i'm bar"</span></span><br></pre></td></tr></table></figure></p>
+<p>这儿相当于把获取到的foo值，赋值给Anotherfoo。从而达到变量名不同也能变量赋值的效果。<br>这部分的机制，就借用阮一峰老师的话语：</p>
+<blockquote>
+<p>这实际上说明，对象的解构赋值是下面形式的简写</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; foo: foo, bar: bar &#125; = &#123; foo: <span class="string">"aaa"</span>, bar: <span class="string">"bbb"</span> &#125;;</span><br></pre></td></tr></table></figure>
+<p>也就是说，对象的解构赋值的内部机制，是先找到同名属性，然后再赋给对应的变量。真正被赋值的是后者，而不是前者。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> &#123; foo: baz &#125; = &#123; foo: <span class="string">"aaa"</span>, bar: <span class="string">"bbb"</span> &#125;;</span><br><span class="line">baz <span class="comment">// "aaa"</span></span><br><span class="line">foo <span class="comment">// error: foo is not defined</span></span><br></pre></td></tr></table></figure></p>
+<p>上面代码中，真正被赋值的是变量baz，而不是模式foo </p>
+<p>同时之前在使用vuex中，对这一句话很不理解：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> vm = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  vuex: &#123;</span><br><span class="line">    getters: &#123; ... &#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">      plus: (&#123; dispatch &#125;) =&gt; dispatch(<span class="string">'INCREMENT'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>2016.04.16更新</p>
+</blockquote>
+<p>在看到Vuex源代码时，发现有这么一部分:<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">constructor</span> <span class="params">(&#123;</span><br><span class="line">  state = &#123;&#125;,</span><br><span class="line">  mutations = &#123;&#125;,</span><br><span class="line">  modules = &#123;&#125;,</span><br><span class="line">  middlewares = [],</span><br><span class="line">  <span class="keyword">strict</span> = <span class="keyword">false</span></span><br><span class="line">&#125; = &#123;&#125;)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>感兴趣的，是函数中，指定了变量的默认参数并进行了变量解构赋值，但给整个参数又指定了默认值。<br>于是手写了一个demo：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">&#123;</span><br><span class="line">  a = '我是默认参数A',</span><br><span class="line">  b = '我是默认参数B'</span><br><span class="line">&#125; = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(a, b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getInfo(&#123; a: <span class="string">'A被覆盖了'</span>, b: <span class="string">'B被覆盖了'</span> &#125;)</span><br><span class="line"><span class="comment">// A被覆盖了 B被覆盖了</span></span><br><span class="line">getInfo(&#123;&#125;)</span><br><span class="line"><span class="comment">// 我是默认参数A 我是默认参数B</span></span><br><span class="line">getInfo()</span><br><span class="line"><span class="comment">// 我是默认参数A 我是默认参数B</span></span><br></pre></td></tr></table></figure></p>
+<p>也就是说，这种写法，当函数未传入覆盖默认值的参数，则默认参数将被解构赋值。从而保证默认参数100%得到使用。<br>而不会出现下面，没有传入参数时报错的现象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInfo</span>(<span class="params">&#123;……一些默认参数&#125; = &#123;&#125;</span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">getAnotherInfo()</span><br><span class="line"><span class="comment">// Uncaught TypeError: Cannot match against 'undefined' or 'null'.</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="嵌套对象的解构"><a href="#嵌套对象的解构" class="headerlink" title="嵌套对象的解构"></a>嵌套对象的解构</h2><p>感觉，这应该是解构赋值中最实用的部分了（个人认为）。<br>因为经常套数据，所以也经常需要把变量的数据取出，转成变量。写多了的话，也是感觉很繁琐的。<br>而ES6，提供了一种全新的解决方式。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> json = &#123;</span><br><span class="line">  <span class="string">'name'</span>: <span class="string">'Lxxyx'</span>,</span><br><span class="line">  <span class="string">'info'</span>: &#123;</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">19</span>,</span><br><span class="line">    <span class="string">'subject'</span>: <span class="string">'HRM'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">var</span> &#123;</span><br><span class="line">  name,</span><br><span class="line">  info: &#123;</span><br><span class="line">    age,</span><br><span class="line">    subject</span><br><span class="line">  &#125;</span><br><span class="line">&#125; = json</span><br><span class="line"></span><br><span class="line">name <span class="comment">// "Lxxyx"</span></span><br><span class="line">age <span class="comment">//19</span></span><br><span class="line">subject <span class="comment">//"HRM"</span></span><br></pre></td></tr></table></figure></p>
+<p>如果直接写变量，代表把相应变量赋值。<br>如果加个<code>:</code>号，则表示操作符。表示要去这里面找变量。<br>如果不理解的话，自己写一遍demo也就理解了。</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>前端路漫漫，且行且歌~</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/17/Vuex源码阅读笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Vuex源码阅读笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/11/前端基础HTTP知识学习之HTTP状态码/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">前端基础HTTP知识学习之HTTP状态码</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="ES6学习之解构赋值" data-title="ES6学习之解构赋值" data-url="http://www.lxxyx.win/2016/04/16/ES6学习之解构赋值/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"Lxxyx"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Lxxyx
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-71744638-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+  </div>
+</body>
+</html>
