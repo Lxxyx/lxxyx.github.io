@@ -2,6 +2,8 @@ aside {
   position: fixed;
   top: 50%;
   right: 0;
+  -webkit-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
   transform: translate(0, -50%); }
   @media print {
     aside {
@@ -13,6 +15,8 @@ aside {
       right: auto;
       display: table;
       width: 100%;
+      -webkit-transform: none;
+      -ms-transform: none;
       transform: none; }
       aside ul {
         display: table-row; }
@@ -222,9 +226,11 @@ dd {
   padding-bottom: 3px; }
 
 .language .language-cert-wrapper {
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   overflow-y: hidden;
+  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center; }
 
@@ -321,7 +327,8 @@ h3 {
 
 body {
   font-family: 'Helvetica Neue', 'Arial', 'PingFang SC', 'Hiragino Sans GB', 'STHeiti', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif;
-  background: #e0e0e0; }
+  background: #e0e0e0;
+  -webkit-font-smoothing: antialiased; }
 
 a,
 strong {
