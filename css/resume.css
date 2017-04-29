@@ -51,7 +51,7 @@ header {
       padding: 30px 10px; } }
   @media print {
     header {
-      padding: 30px 45px; } }
+      padding: 20px 45px; } }
 
 .qrcode {
   float: left;
@@ -129,6 +129,16 @@ address {
 
 section {
   margin-bottom: 14px; }
+  @media print {
+    section {
+      margin-bottom: 8px; } }
+
+@media print {
+  dl {
+    margin: 10px 0; }
+  dd {
+    line-height: 1.2;
+    font-size: 14; } }
 
 dd {
   line-height: 1.42; }
@@ -160,7 +170,7 @@ dd {
       padding: 30px 10px; } }
   @media print {
     .content {
-      padding: 30px 20px !important; } }
+      padding: 20px 20px !important; } }
 
 .sec-title-wrapper {
   overflow-y: hidden; }
@@ -263,6 +273,9 @@ dd {
 
 .language .language-skills li {
   line-height: 1.4; }
+  @media print {
+    .language .language-skills li {
+      line-height: 1.2; } }
 
 .experience {
   overflow-y: hidden; }
@@ -275,10 +288,16 @@ dd {
   .experience .experience-task {
     font-size: 15px;
     margin-left: 27px; }
+    @media print {
+      .experience .experience-task {
+        font-size: 14px; } }
   .experience .experience-time {
     font-size: 15px;
     float: right;
     margin-right: 10px; }
+    @media print {
+      .experience .experience-time {
+        font-size: 14px; } }
   .experience .experience-link {
     display: inline-block;
     float: right;
