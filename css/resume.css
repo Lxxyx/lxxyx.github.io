@@ -168,7 +168,7 @@ dd {
       padding: 30px 10px; } }
   @media print {
     .content {
-      padding: 20px 20px !important; } }
+      padding: 12px 12px !important; } }
 
 .sec-title-wrapper {
   overflow-y: hidden; }
@@ -207,6 +207,9 @@ dd {
     color: #fff;
     border-radius: 5px;
     background: #333; }
+    .timeline-wrapper .timeline-title .skill {
+      color: #ffffff;
+      font-weight: normal; }
   .timeline-wrapper::after {
     float: left;
     width: 0;
@@ -321,7 +324,9 @@ footer {
   margin: 15px 6px; }
   @media print {
     footer {
-      display: none; } }
+      margin: 0;
+      display: none;
+      visibility: hidden; } }
   footer a {
     font-weight: 700;
     text-decoration: none;
@@ -340,10 +345,13 @@ ul {
 h3 {
   font-size: 20px; }
 
-body {
+html, body {
   font-family: "Helvetica Neue", "Arial", "PingFang SC", "Hiragino Sans GB", "STHeiti", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   background: #e0e0e0;
   -webkit-font-smoothing: antialiased; }
+  @media print {
+    html, body {
+      background-color: #ffffff; } }
 
 a,
 strong {
