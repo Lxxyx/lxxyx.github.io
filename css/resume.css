@@ -286,7 +286,11 @@ dd {
     margin: 6px 0 5px 26px; }
   .experience .experience-task {
     font-size: 15px;
-    margin-left: 27px; }
+    margin-left: 27px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center; }
     @media print {
       .experience .experience-task {
         font-size: 14px; } }
