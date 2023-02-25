@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, ">
+  <title>Document</title>
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
+  <script>
+    function showGlobal () {
+      console.log(window);
+    }
+
+    function reload() {
+      window.location.reload();
+    }
+  </script>
+</head>
+<body>
+  <h1>Website alive!</h1>
+  <button onclick="showGlobal()">Show global</button>
+  <button onclick="reload()">Reload</button>
+</body>
+</html>
